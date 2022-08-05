@@ -1,10 +1,10 @@
-allprojects {
+/*allprojects {
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
-}
+}*/
 
 ext {
 
