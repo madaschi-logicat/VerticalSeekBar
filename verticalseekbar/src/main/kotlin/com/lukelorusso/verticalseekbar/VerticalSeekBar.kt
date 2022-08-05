@@ -61,6 +61,11 @@ open class VerticalSeekBar @JvmOverloads constructor(
             field = value
             applyAttributes()
         }
+    var hasBackground: Boolean = true
+        set(value) {
+            field = value
+            applyAttributes()
+        }
     var barBackgroundStartColor: Int = Color.parseColor(DEFAULT_DRAWABLE_BACKGROUND)
         set(value) {
             field = value
@@ -207,6 +212,11 @@ open class VerticalSeekBar @JvmOverloads constructor(
                         R.styleable.VerticalSeekBar_vsb_bar_background_gradient_end,
                         barBackgroundEndColor
                     )
+                hasBackground =
+                    attributes.getBoolean(
+                        R.styleable.VerticalSeekBar_vsb_bar_has_background,
+                        hasBackground
+                    )
                 attributes.getDrawable(R.styleable.VerticalSeekBar_vsb_bar_background)?.also {
                     barBackgroundDrawable = it
                 }
@@ -339,6 +349,9 @@ open class VerticalSeekBar @JvmOverloads constructor(
                 intArrayOf(barBackgroundStartColor, barBackgroundEndColor)
             ).apply { cornerRadius = 0f }
             barBackground.background = barBackgroundDrawable
+
+            if (hasBackground) barBackground.visibility = VISIBLE
+            else barBackground.visibility = INVISIBLE
 
             // Customizing drawableProgress
             if (barProgressDrawable == null) barProgressDrawable = GradientDrawable(
